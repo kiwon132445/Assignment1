@@ -1,6 +1,6 @@
 package ca.bcit.assignment1;
 
-import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -12,18 +12,10 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class NewsReader extends AsyncTask<String[], Void, String> {
-
-    public void doInBackground(){
-
-    }
-
-
-    public void search(){
+public class HttpHandler {
+    private static final String TAG = HttpHandler.class.getSimpleName();
+    public HttpHandler() {   }
+    public String makeServiceCall(String reqUrl) {
         String response = null;
         try {
             URL url = new URL(reqUrl);
@@ -32,15 +24,21 @@ public class NewsReader extends AsyncTask<String[], Void, String> {
             // read the response
             InputStream in = new BufferedInputStream(conn.getInputStream());
             response = convertStreamToString(in);
-        } catch(Exception e){
-
+        } catch (MalformedURLException e) {
+            Log.e(TAG, "MalformedURLException: " + e.getMessage());
+        } catch (ProtocolException e) {
+            Log.e(TAG, "ProtocolException: " + e.getMessage());
+        } catch (IOException e) {
+            Log.e(TAG, "IOException: " + e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, "Exception: " + e.getMessage());
         }
+        return response;
     }
 
-    private String convertStreamToString(InputStream in){
+    private String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
-
         String line;
         try {
             while ((line = reader.readLine()) != null) {
@@ -50,13 +48,12 @@ public class NewsReader extends AsyncTask<String[], Void, String> {
             e.printStackTrace();
         } finally {
             try {
-                in.close();
+                is.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
         return sb.toString();
     }
-
 }
+
