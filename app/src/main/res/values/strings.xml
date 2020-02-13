@@ -3,15 +3,5 @@
     <string name="input_label">Search Bar</string>
     <string name="auto_hint">basketball, Canada, impeachment, etc &#8230;</string>
     <string name="input_hint">Please Enter a word</string>
-    <string name="details">Details</string>
-    <string-array name="details_list">
-        <item>Source</item>
-        <item>Author</item>
-        <item>Title</item>
-        <item>Description</item>
-        <item>Url</item>
-        <item>Thumbnail</item>
-        <item>Published At</item>
-        <item>Content</item>
-    </string-array>
+    <string  name="details">Articles details</string>
 </resources>

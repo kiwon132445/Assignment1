@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
+class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap>{
     /*
     A weak reference, simply put, is a reference that isn't strong enough to force an object to remain in memory.
     Weak references allow you to leverage the garbage collector's ability to determine reachability for you,
@@ -20,8 +20,8 @@ class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
      */
     private final WeakReference<ImageView> imageViewReference;
 
-    public ImageDownloaderTask(ImageView imageView) {
-        imageViewReference = new WeakReference<ImageView>(imageView);
+    ImageDownloaderTask(ImageView imageView) {
+        imageViewReference = new WeakReference<>(imageView);
     }
 
     @Override
@@ -60,8 +60,7 @@ class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 
             InputStream inputStream = urlConnection.getInputStream();
             if (inputStream != null) {
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                return bitmap;
+                return BitmapFactory.decodeStream(inputStream);
             }
         } catch (Exception e) {
             urlConnection.disconnect();

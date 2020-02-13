@@ -3,15 +3,25 @@ package ca.bcit.assignment1;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Article {
+import java.io.Serializable;
+import java.util.HashMap;
+
+public class Article implements Serializable {
+    Article(HashMap<String,String> article) {
+        source = article.get("source");
+        authorName = article.get("author");
+        title = article.get("title");
+        description = article.get("description");
+        url = article.get("url");
+        urlToImage = article.get("urlToImage");
+        publishedAt = article.get("publishedAt");
+        content = article.get("content");
+    }
     @SerializedName("source")
     @Expose
-    private Source source;
+    private String source;
     public String getSource() {
-        return source.getName();
-    }
-    public void setSource(Source source) {
-        this.source = source;
+        return source;
     }
 
     @SerializedName("author")
@@ -20,18 +30,12 @@ public class Article {
     public String getAuthorName() {
         return authorName;
     }
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
 
     @SerializedName("title")
     @Expose
     private String title;
     public String getTitle() {
         return title;
-    }
-    public void setTitlee(String title) {
-        this.title = title;
     }
 
     @SerializedName("description")
@@ -40,18 +44,12 @@ public class Article {
     public String getDescription() {
         return description;
     }
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @SerializedName("url")
     @Expose
     private String url;
     public String geturl() {
         return url;
-    }
-    public void seturl(String url) {
-        this.url = url;
     }
 
     @SerializedName("urlToImage")
@@ -60,9 +58,6 @@ public class Article {
     public String geturlToImage() {
         return urlToImage;
     }
-    public void seturlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
 
     @SerializedName("publishedAt")
     @Expose
@@ -70,17 +65,11 @@ public class Article {
     public String getpublishedAt() {
         return publishedAt;
     }
-    public void setpublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
-    }
 
     @SerializedName("content")
     @Expose
     private String content;
     public String getcontent() {
         return content;
-    }
-    public void setcontent(String content) {
-        this.content = content;
     }
 }
